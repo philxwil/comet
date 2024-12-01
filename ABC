@@ -1,0 +1,121 @@
+\documentclass{article}
+\usepackage{amsmath} 
+\usepackage[ngerman]{babel}
+\usepackage{hyperref}
+
+\title{Abgabe 1 für Computergestütze Methoden}
+\author{Gruppe 8 \\
+Phil Maor Wilming (4348861), Emilia Obermeier (4349125),\\ Alexander Trapp (4334165)} 
+\date{1. Dezember 2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Der zentrale Grenzwertsatz}
+Der zentrale Grenzwertsatz (ZGS) ist ein fundamentales Resultat der\\
+Wahrscheinlichkeitstheorie, das die Verteilung von Summen unabhängiger, identisch verteilter (i.i.d) Zufallsvariablen (ZV) beschreibt.\\
+Er besagt, dass unter bestimmten Voraussetzungen die Summe einer großen Anzahl solcher ZV annähernd normalverteilt ist, unabhängig von der Verteilung der einzelnen ZV. Dies ist besonders nützlich, da die Normalverteilung gut untersucht und mathematisch handhabbar ist.
+
+\subsection{Aussage}
+Sei $X_1, X_2, \dots, X_n$ eine Folge von i.i.d. ZV mit dem Erwartungswert $\mu = E(X_i)$ und der Varianz $\sigma^2 = \text{Var}(X_i)$, wobei $0 < \sigma^2 < \infty$ gelte. Dann konvergiert die standardisierte Summe $Z_n$ dieser ZV für $n \to \infty$ in Verteilung gegen eine Standardnormalverteilung:\footnote{Der zentrale Grenzwertsatz hat verschiedene Verallgemeinerungen. Eine davon ist der \textbf{Lindeberg-Feller-Zentrale Grenzwertsatz}[1, Seite 328], der schwächere Bedingungen an die Unabhängigkeit  und die identische Verteilung der ZV stellt.}
+\[
+Z_n = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma \sqrt{n}} \overset{d}{\to} N(0, 1).
+\]
+Das bedeutet, dass für große $n$ die Summe der ZV näherungsweise normalverteilt ist mit Erwartungswert $n\mu$ und Varianz $n\sigma^2$:
+\[
+\sum_{i=1}^n X_i \sim N(n\mu, n\sigma^2).
+\]
+
+\subsection{Erklärung der Standardisierung}
+Um die Summe der ZV in eine Standardnormalverteilung zu transformieren, subtrahiert man den Erwartungswert $n\mu$ und teilt durch die Standardabweichung $\sigma \sqrt{n}$. Dies führt zu der obigen Formel (1). Die Darstellung (2) ist für $n \to \infty$ nicht wohldefiniert.
+
+\subsection{Anwendungen}
+Der ZGS wird in vielen Bereichen der Statistik und der Wahrscheinlichkeitstheorie angewendet. Typische Beispiele sind:
+\begin{itemize}
+    \item (Berechnung von Konfidenzintervallen für Stichprobenmittelworte.)
+    \item (Approximation von Wahrscheinlichkeiten für Summen oder Mittelwerte)
+\end{itemize}
+
+\section{Bearbeitung zur Aufgabe 1}
+\textbf{Tabellenkalkulation}\\
+1st Command:
+=MAX(J2554;J2917) Result: 83\\
+2nd Command:
+(83-32)*5/9 Result: 28,33°C\\
+
+\textbf{Datenbank Schemata}:\\
+
+\textbf{1. Normalform}\\
+group; Bearbeitungsgruppe\\
+station; Radverleihniederlassung\\
+date; Datum \\
+day\_of\_year; Tag im Jahr(1-365/1-366)\\
+day\_of\_week; Wochentag(1-7)\\
+month\_of\_year; Monat im Jahr(1-12)\\
+precipitation; Niederschlagsmenge(l/qm)\\
+windspeed; Windgeschwindigkeit(km/h)\\
+min\_temperature; Niedgriste Temperatur(°F)\\
+average\_temperature; Durchschnittliche Temperatur(°F)\\
+max\_temperature; Höchste Temperatur(°F)\\
+count; Anzahl Verleihvorgänge\\
+zugehörige Primärschlüssel: group, station, date\\
+
+
+\textbf{2. Normalform}\\
+group; Bearbeitungsgruppe\\
+station; Radverleihniederlassung\\
+date; Datum \\
+precipitation; Niederschlagsmenge(l/qm)\\
+windspeed; Windgeschwindigkeit(km/h)\\
+min\_temperature; Niedgriste Temperatur(°F)\\
+average\_temperature; Durchschnittliche Temperatur(°F)\\
+max\_temperature; Höchste Temperatur(°F)\\
+count; Anzahl Verleihvorgänge\\
+zugehörige Primärschlüssel: group, station, date \\
+
+\textbf{Tabelle für date}\\
+date; Datum \\
+day\_of\_year; Tag im Jahr(1-365/1-366)\\
+day\_of\_week; Wochentag(1-7)\\
+month\_of\_year; Monat im Jahr(1-12)\\
+zugehörige Primärschlüssel: date\\
+
+\textbf{SQL-Erstell Command}\\
+CREATE TABLE bike\_sharing\_data (\\
+station VARCHAR(100),\\
+date DATE,\\
+day\_of\_year INT,\\
+day\_of\_year INT,\\
+month\_of\_year INT,\\
+precipitation FLOAT,\\
+windspeed FLOAT,\\
+min\_temperature INT,\\
+average\_temperature INT,\\
+max\_temperature INT,\\
+count INT,\\
+);\\
+    
+\textbf{SQL-Abfrage Command}\\
+SELECT\\
+MAX(average\_temperature) AS  highest\_average\_temperature\_celsius\\
+FROM\\
+bike\_sharing\_data\_(with\_NAs)\\
+WHERE\\
+Group = '8';\\
+
+\section*{Literatur}    
+[1] Achim Klenke. \textit{Wahrscheinlichkeitstheorie.} Springer, 3. edition, 2013.
+\section*{Quellenverzeichnis} 
+\begin{enumerate}
+\item https://www.overleaf.com/learn \\
+\item https://www.latex-project.org/ \\
+\item https://mirrors.ibiblio.org/CTAN/info/latexcheat/latexcheat-de/latexsheet-de.pdf\\
+\item https://www.uni-frankfurt.de/69481937/handout.pdf\\
+\item https://www.studysmarter.de/studium/mathematik-studium/statistik-studium/der-zentrale-grenzwertsatz/\\
+\item https://johnbsmith.github.io/Typografie/LaTeX-Befehle.htm\\
+\item https://www.uni-frankfurt.de/53485609/latexsheet.pdf
+\end{enumerate}
+\end{document}
